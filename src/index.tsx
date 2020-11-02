@@ -1,14 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+chrome.tabs.executeScript(
+  {
+    code: "window.getSelection().toString();",
+  },
+  function (selection) {
+    var sel = selection[0];
+    console.log(sel);
+    ReactDOM.render(
+      <React.StrictMode>
+        <App text={sel} />
+      </React.StrictMode>,
+      document.getElementById("root")
+    );
+  }
 );
 
 // If you want to start measuring performance in your app, pass a function
